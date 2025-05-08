@@ -1,6 +1,3 @@
-Claro, aqui está o README ajustado para a primeira pessoa:
-
----
 
 # Jarvis Chatbot
 
