@@ -27,5 +27,43 @@ Para o desenvolvimento do Jarvis chatbot, eu usei HTML, CSS e JavaScript para ad
    - Usei a API `SpeechSynthesis` para converter texto em fala.
    - A variável `text_speak` foi criada usando `SpeechSynthesisUtterance` e atribuí seu valor à função `text_speak`.
 
+## Como Contribuir
+
+Eu ficaria muito feliz com sua contribuição para melhorar o Jarvis chatbot! Siga as etapas abaixo para contribuir com o projeto:
+
+1. **Faça um Fork do Repositório**
+   - Clique no botão "Fork" no canto superior direito da página do repositório para criar uma cópia do projeto no seu GitHub.
+
+2. **Clone o Repositório**
+   - Clone o repositório para sua máquina local usando o comando:
+     ```bash
+     git clone https://github.com/seu-usuario/JarvisChatbot.git
+     ```
+
+3. **Crie uma Branch**
+   - Crie uma nova branch para trabalhar nas suas alterações:
+     ```bash
+     git checkout -b minha-nova-funcionalidade
+     ```
+
+4. **Faça as Alterações**
+   - Adicione suas melhorias ou novas funcionalidades ao projeto.
+
+5. **Teste Suas Alterações**
+   - Certifique-se de que tudo está funcionando corretamente antes de enviar suas alterações.
+
+6. **Commit e Push**
+   - Faça o commit das suas alterações e envie para o seu repositório fork:
+     ```bash
+     git add .
+     git commit -m "Adicionei uma nova funcionalidade"
+     git push origin minha-nova-funcionalidade
+     ```
+
+7. **Abra um Pull Request**
+   - Vá até o repositório original e clique em "New Pull Request" para enviar suas alterações para revisão.
+
+Agradeço desde já por sua contribuição para tornar o Jarvis chatbot ainda melhor!
+
 
 
