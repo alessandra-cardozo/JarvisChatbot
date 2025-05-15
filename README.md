@@ -23,6 +23,7 @@ Para o desenvolvimento do Jarvis chatbot, eu usei HTML, CSS e JavaScript para ad
    - Passei um texto como argumento para a função `speak`.
    - Usei a API `SpeechSynthesis` para converter texto em fala.
    - A variável `text_speak` foi criada usando `SpeechSynthesisUtterance` e atribuí seu valor à função `text_speak`.
+   - SpeechSynthesisUtterance é uma interface de programação de aplicativos (API) introduzida no HTML5, que permite aos navegadores da web sintetizarem voz a partir de texto.
 
 
 
