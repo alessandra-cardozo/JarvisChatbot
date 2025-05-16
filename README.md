@@ -1,21 +1,54 @@
-Jarvis Chatbot: Seu Assistente Virtual Inteligente
 
-Descrição
+# JARVIS - Virtual Assistant
 
-Jarvis Chatbot é um assistente virtual de IA que utiliza JavaScript avançado para converter texto em fala e processamento de linguagem natural. Ele busca informações no Google para auxiliar na resolução de dúvidas e tarefas, interpretando comandos de voz e apresentando os resultados da web através da voz.
+JARVIS é um assistente virtual baseado em **HTML, CSS e JavaScript** que pode reconhecer comandos de voz e executar ações, como abrir sites, informar a hora e responder perguntas.
 
-Tecnologias Utilizadas
+## 🚀 Funcionalidades
 
-. HTML
-. CSS
-. JavaScript
-. API SpeechSynthesis (converte texto da busca do Google em fala)
-. Processamento de Linguagem Natural (interpreta a solicitação para busca no Google)
-. Font Awesome (ícones)
+- 🔊 **Reconhecimento de voz** para interagir com o usuário
+- 🎤 **Botão de ativação** para iniciar comandos de voz
+- 🌐 **Abertura automática de sites populares** (Google, YouTube, Facebook)
+- ⏰ **Informações sobre hora e data atuais**
+- 📚 **Busca automática no Google e Wikipedia**
+- 🖩 **Acesso rápido à calculadora**
 
-Etapas da Construção
+## 📂 Estrutura do projeto
 
-1 - Título e Descrição: Apresentação do Jarvis Chatbot e sua capacidade de buscar informações no Google para auxiliar em tarefas.
-2 - Estilização: Aplicação de estilo visual com CSS.
-3 - Ícones: Adição de ícones para melhorar a interface.
-4 - Função Falar (speak): Utiliza a API SpeechSynthesis para verbalizar o texto retornado das buscas no Google, permitindo que o chatbot comunique as informações relevantes para auxiliar o usuário.
+```
+/
+│── index.html   # Estrutura da página principal
+│── style.css    # Estilo da interface
+│── app.js       # Lógica do assistente virtual
+│── avatar.png   # Ícone do assistente
+│── giphy.gif    # Imagem animada do assistente
+```
+
+## 🔧 Tecnologias utilizadas
+
+- HTML5
+- CSS3
+- JavaScript (SpeechSynthesis API, SpeechRecognition API)
+
+## 🎙️ Como usar?
+
+1. **Abra o projeto** no navegador.
+2. **Clique no botão do microfone** para ativar o assistente.
+3. **Diga um comando** como:
+   - "Open Google" → JARVIS abrirá o Google.
+   - "What time is it?" → JARVIS informará o horário atual.
+   - "Search Wikipedia for Elon Musk" → JARVIS abrirá a Wikipédia com informações sobre Elon Musk.
+
+## 🛠️ Como instalar?
+
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/seu-usuario/jarvis-virtual-assistant.git
+   ```
+2. Abra o arquivo `index.html` em um navegador.
+
+## 📜 Licença
+
+Este projeto está sob a licença **MIT**.
+
+---
+
