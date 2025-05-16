@@ -1,29 +1,38 @@
+Jarvis Chatbot: Seu Assistente Virtual Inteligente
 
-# Jarvis Chatbot
+Descrição
 
-## Descrição
+Apresento o Jarvis Chatbot, um assistente virtual de inteligência artificial inspirado em renomados sistemas como Siri, Alexa e Google Assistant. Este projeto demonstra a aplicação de conceitos avançados de JavaScript, integrando a funcionalidade de conversão de texto em fala com o poder do processamento de linguagem natural para buscar informações relevantes no Google, auxiliando você na resolução de dúvidas e na obtenção do conhecimento necessário para diversas tarefas. Em essência, o Jarvis "escuta" suas solicitações, interpreta seu significado e apresenta os resultados da pesquisa diretamente da web através da voz, tornando a busca por respostas mais rápida e acessível.
+Tecnologias Utilizadas
 
-Eu criei o Jarvis chatbot, um assistente virtual de IA, assim como Siri, Alexa e Google Assistant. Este projeto utiliza o conceito avançado de JavaScript com a funcionalidade de converter texto em fala e depois usar o método de processamento de linguagem natural. Ou seja, ele "escuta", entende o que você está pedindo e fornece o resultado da pesquisa na web.
+As seguintes linguagens e recursos foram empregados no desenvolvimento do Jarvis Chatbot:
 
-## Linguagens Usadas no Projeto
+. HTML: Para a estruturação da interface web.
 
-Para o desenvolvimento do Jarvis chatbot, eu usei HTML, CSS e JavaScript para adicionar estilo e funcionalidade ao projeto. Criei uma estrutura padrão onde adicionei alguns arquivos de mídia e um botão, que utilizo para fornecer comandos ao assistente virtual através de uma função JavaScript.
+. CSS: Para a estilização e o design visual do projeto.
 
-## Etapas para Construir o Jarvis Chatbot
+. Para a lógica de programação, incluindo a interação com a API de fala e o processamento da entrada do usuário para realizar buscas no Google.
 
-1. **Título e Descrição**
-   - Dei um título adequado ao meu assistente virtual Jarvis para que todos possam entender do que se trata o projeto.
+. API SpeechSynthesis: Fundamental para converter o texto retornado das buscas no Google em saída de voz, permitindo que o chatbot "fale" as respostas.
 
-2. **Adicionar Estilo**
-   - Incorporei o link externo ao arquivo CSS para adicionar estilo ao projeto.
-   - Usei alguns ícones no projeto através do site de ícones Font Awesome, onde adicionei diversos ícones gratuitamente.
+. Processamento de Linguagem Natural (Conceito): A lógica implementada em JavaScript visa interpretar a intenção por trás das perguntas do usuário para formular consultas de busca eficazes no Google.
 
-3. **Criar Função Speak**
-   - Criei uma função chamada `speak`.
-   - Passei um texto como argumento para a função `speak`.
-   - Usei a API `SpeechSynthesis` para converter texto em fala.
-   - A variável `text_speak` foi criada usando `SpeechSynthesisUtterance` e atribuí seu valor à função `text_speak`.
-   - SpeechSynthesisUtterance é uma interface de programação de aplicativos (API) introduzida no HTML5, que permite aos navegadores da web sintetizarem voz a partir de texto.
+. Font Awesome: Utilizado para incorporar ícones que enriquecem a experiência visual do chatbot.
 
+Etapas da Construção do Jarvis Chatbot
 
+1 - Título e Descrição: Definição de um título claro e uma descrição concisa para apresentar o projeto, destacando sua funcionalidade principal de buscar e verbalizar informações do Google.
+2 - Estilização: Vinculação de um arquivo CSS externo para aplicar estilos personalizados e tornar a interface do chatbot visualmente atraente.
+3 - Ícones: Integração de ícones da biblioteca Font Awesome para melhorar a usabilidade e o design do projeto.
+4 - Função Falar (speak):
+. Criação de uma função JavaScript chamada speak que recebe um texto como argumento.
+. Utilização da API SpeechSynthesis para converter o texto fornecido em fala audível.
+Instanciação de um objeto SpeechSynthesisUtterance (armazenado na variável text_speak) e atribuição do texto a ser falado a ele.
+. A interface SpeechSynthesisUtterance, introduzida no HTML5, capacita os navegadores a sintetizarem voz a partir do texto, permitindo que o Jarvis comunique os resultados das suas buscas no Google de forma sonora.
+5 - Integração da Busca no Google: (Implícito na descrição e funcionalidade)
+
+. A lógica em JavaScript processa a entrada do usuário (comando de voz ou texto).
+. Com base nessa entrada, o chatbot formula uma consulta de busca relevante.
+. Essa consulta é então utilizada para buscar informações no Google.
+. Os resultados relevantes dessa busca são, posteriormente, passados para a função speak para serem verbalizados ao usuário.
 
