@@ -2,6 +2,19 @@
 const btn = document.querySelector(".talk");
 const content = document.querySelector(".content");
 
+// Normaliza o texto para facilitar o reconhecimento das frases
+function normalize(text) {
+    return text
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[.,!?;:]/g, "")
+        .replace(/\s+/g, " ")
+        .replace(/\bjarvis\b/g, "")
+        .trim();
+}
+
+// Faz o JARVIS falar
 function speak(text) {
     if (!("speechSynthesis" in window)) {
         content.textContent = "Seu navegador não suporta voz.";
@@ -25,13 +38,22 @@ function speak(text) {
     window.speechSynthesis.speak(speech);
 }
 
+// Abre um site
+function openSite(url, message) {
+    window.open(url, "_blank");
+    speak(message);
+}
+
+// Reconhecimento de voz
 const SpeechRecognition =
     window.SpeechRecognition ||
     window.webkitSpeechRecognition;
 
 if (!SpeechRecognition) {
+
     content.textContent =
-        "Use o Google Chrome para conversar comigo.";
+        "Seu navegador não suporta reconhecimento de voz. Use o Google Chrome.";
+
 } else {
 
     const recognition = new SpeechRecognition();
@@ -43,6 +65,7 @@ if (!SpeechRecognition) {
 
     btn.addEventListener("click", () => {
         content.textContent = "Estou ouvindo. Pode falar!";
+
         try {
             recognition.start();
         } catch (error) {
@@ -52,22 +75,10 @@ if (!SpeechRecognition) {
 
     recognition.onresult = (event) => {
 
-        const alternatives =
-            event.results[event.resultIndex];
+        const alternatives = event.results[event.resultIndex];
 
-        // Seleciona a alternativa com maior confiança
-        let best = alternatives[0];
-
-        for (let i = 1; i < alternatives.length; i++) {
-            if (
-                alternatives[i].confidence >
-                best.confidence
-            ) {
-                best = alternatives[i];
-            }
-        }
-
-        const transcript = best.transcript;
+        // Usa a primeira transcrição, que é a principal opção do navegador
+        const transcript = alternatives[0].transcript;
 
         content.textContent = "Você disse: " + transcript;
 
@@ -75,12 +86,13 @@ if (!SpeechRecognition) {
     };
 
     recognition.onerror = (event) => {
+
         if (event.error === "not-allowed") {
-            content.textContent =
-                "Permita o acesso ao microfone.";
+            content.textContent = "Permita o acesso ao microfone.";
+
         } else if (event.error === "no-speech") {
-            content.textContent =
-                "Não ouvi sua voz. Tente novamente.";
+            content.textContent = "Não ouvi sua voz. Tente novamente.";
+
         } else {
             content.textContent =
                 "Tive dificuldade para ouvir. Tente novamente.";
@@ -91,127 +103,201 @@ if (!SpeechRecognition) {
         console.log("Reconhecimento finalizado.");
     };
 
+    // Interpreta os comandos e perguntas
     function takeCommand(originalMessage) {
 
-        let message = originalMessage
-            .toLowerCase()
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "")
-            .replace(/[.,!?]/g, "")
-            .trim();
+        const message = normalize(originalMessage);
 
+        if (!message) {
+            speak("Não consegui ouvir sua pergunta. Pode repetir?");
+            return;
+        }
+
+        // SAUDAÇÕES
         if (
+            message === "oi" ||
             message.includes("ola") ||
-            message.includes("oi jarvis") ||
             message.includes("bom dia") ||
             message.includes("boa tarde") ||
             message.includes("boa noite")
         ) {
             speak("Olá! É um prazer falar com você. Como posso ajudar?");
+        }
 
-        } else if (
-            message.includes("abrir google") ||
-            message.includes("abre google") ||
-            message.includes("abra o google")
+        // DATA DE AMANHÃ
+        else if (
+            message.includes("amanha") ||
+            message.includes("dia seguinte")
         ) {
-            window.open("https://www.google.com", "_blank");
-            speak("Abrindo o Google.");
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
 
-        } else if (
-            message.includes("abrir youtube") ||
-            message.includes("abre youtube") ||
-            message.includes("abra o youtube")
-        ) {
-            window.open("https://www.youtube.com", "_blank");
-            speak("Abrindo o YouTube.");
+            const date = tomorrow.toLocaleDateString("pt-BR", {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric"
+            });
 
-        } else if (
-            message.includes("abrir facebook") ||
-            message.includes("abre facebook") ||
-            message.includes("abra o facebook")
-        ) {
-            window.open("https://www.facebook.com", "_blank");
-            speak("Abrindo o Facebook.");
+            speak("Amanhã será " + date);
+        }
 
-        } else if (
-            message.includes("horas") ||
-            message.includes("que hora")
-        ) {
-            const time = new Date().toLocaleTimeString(
-                "pt-BR",
-                { hour: "2-digit", minute: "2-digit" }
-            );
-            speak("Agora são " + time);
-
-        } else if (
-            message.includes("data de hoje") ||
+        // DATA DE HOJE
+        else if (
+            message.includes("hoje") ||
             message.includes("que dia") ||
-            message.includes("data")
+            message.includes("qual a data") ||
+            message.includes("qual e a data") ||
+            message.includes("data de hoje")
         ) {
-            const date = new Date().toLocaleDateString("pt-BR");
-            speak("Hoje é dia " + date);
+            const today = new Date();
 
-        } else if (
-            message.startsWith("pesquisar") ||
-            message.startsWith("pesquisa") ||
-            message.startsWith("procura") ||
-            message.startsWith("buscar") ||
-            message.startsWith("busca")
+            const date = today.toLocaleDateString("pt-BR", {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric"
+            });
+
+            speak("Hoje é " + date);
+        }
+
+        // HORÁRIO
+        else if (
+            message.includes("horas") ||
+            message.includes("que hora") ||
+            message.includes("horario")
         ) {
-            const query = message
-                .replace(/^(pesquisar|pesquisa|procura|buscar|busca)\s*/, "")
-                .trim();
+            const time = new Date().toLocaleTimeString("pt-BR", {
+                hour: "2-digit",
+                minute: "2-digit"
+            });
+
+            speak("Agora são " + time);
+        }
+
+        // GOOGLE
+        else if (
+            message.includes("google") &&
+            (
+                message.includes("abrir") ||
+                message.includes("abre") ||
+                message.includes("entrar") ||
+                message.includes("acessar") ||
+                message.includes("ir para") ||
+                message.includes("ir no")
+            )
+        ) {
+            openSite("https://www.google.com", "Abrindo o Google.");
+        }
+
+        // YOUTUBE
+        else if (
+            message.includes("youtube") &&
+            (
+                message.includes("abrir") ||
+                message.includes("abre") ||
+                message.includes("entrar") ||
+                message.includes("acessar") ||
+                message.includes("ir para") ||
+                message.includes("ir no")
+            )
+        ) {
+            openSite("https://www.youtube.com", "Abrindo o YouTube.");
+        }
+
+        // FACEBOOK
+        else if (
+            message.includes("facebook") &&
+            (
+                message.includes("abrir") ||
+                message.includes("abre") ||
+                message.includes("entrar") ||
+                message.includes("acessar") ||
+                message.includes("ir para") ||
+                message.includes("ir no")
+            )
+        ) {
+            openSite("https://www.facebook.com", "Abrindo o Facebook.");
+        }
+
+        // PESQUISAR NO GOOGLE
+        else if (
+            /^(pesquisar|pesquisa|pesquise|procura|procure|buscar|busca|busque)\b/.test(message)
+        ) {
+            const query = message.replace(
+                /^(pesquisar|pesquisa|pesquise|procura|procure|buscar|busca|busque)\s*/,
+                ""
+            ).trim();
 
             if (query) {
-                window.open(
+                openSite(
                     "https://www.google.com/search?q=" +
                     encodeURIComponent(query),
-                    "_blank"
+                    "Vou pesquisar " + query + " no Google."
                 );
-                speak("Pesquisando " + query + " no Google.");
             } else {
                 speak("O que você gostaria que eu pesquisasse?");
             }
+        }
 
-        } else if (message.includes("wikipedia")) {
+        // WIKIPÉDIA
+        else if (message.includes("wikipedia")) {
 
-            const query = message
-                .replace("wikipedia", "")
-                .trim();
+            const query = message.replace("wikipedia", "").trim();
 
             if (query) {
-                window.open(
+                openSite(
                     "https://pt.wikipedia.org/wiki/" +
                     encodeURIComponent(query),
-                    "_blank"
+                    "Pesquisando na Wikipédia."
                 );
-                speak("Pesquisando na Wikipédia.");
             } else {
                 speak("O que você gostaria de pesquisar na Wikipédia?");
             }
+        }
 
-        } else if (
+        // AGRADECIMENTOS
+        else if (
             message.includes("obrigado") ||
-            message.includes("obrigada")
+            message.includes("obrigada") ||
+            message.includes("muito obrigado") ||
+            message.includes("muito obrigada")
         ) {
             speak("Por nada! Estou sempre à disposição.");
+        }
 
-        } else if (
+        // IDENTIDADE
+        else if (
             message.includes("quem e voce") ||
-            message.includes("quem e o jarvis")
+            message.includes("quem e o jarvis") ||
+            message.includes("seu nome")
         ) {
-            speak("Eu sou o Jarvis, seu assistente virtual.");
+            speak("Eu sou o Jarvis, seu assistente virtual. Estou aqui para ajudar você.");
+        }
 
-        } else if (
+        // DESPEDIDA
+        else if (
             message.includes("tchau") ||
-            message.includes("ate logo")
+            message.includes("ate logo") ||
+            message.includes("ate mais")
         ) {
-            speak("Até logo! Foi um prazer ajudar você.");
+            speak("Até logo! Foi um prazer conversar com você.");
+        }
 
-        } else {
-            speak(
-                "Desculpe, não consegui identificar seu comando. Pode falar novamente?"
+        // PERGUNTA OU COMANDO NÃO CADASTRADO
+        else {
+            content.textContent =
+                "Vou procurar na internet: " + originalMessage;
+
+            speak("Ainda não sei responder diretamente a essa pergunta. Vou procurar para você no Google.");
+
+            window.open(
+                "https://www.google.com/search?q=" +
+                encodeURIComponent(originalMessage),
+                "_blank"
             );
         }
     }
 }
+
