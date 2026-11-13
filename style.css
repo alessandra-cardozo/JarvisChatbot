@@ -1,9 +1,15 @@
+
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;200;300;400;500;600;700&display=swap");
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: "Roboto Mono", monospace;
+}
+
+body {
+    background: #000;
 }
 
 .main {
@@ -15,10 +21,16 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 20px;
 }
 
 .main .image-container {
     padding: 10px;
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .main .image-container .image {
@@ -30,7 +42,9 @@
 
 .main .image-container .image img {
     width: 350px;
-    align-items: center;
+    max-width: 90%;
+    height: auto;
+    object-fit: contain;
 }
 
 .main .image-container h1 {
@@ -38,12 +52,14 @@
     text-align: center;
     margin-bottom: 10px;
     font-size: 40px;
+    letter-spacing: 8px;
 }
 
 .main .image-container p {
     color: #324042;
     text-align: center;
     margin-bottom: 40px;
+    font-size: 14px;
 }
 
 .main .input {
@@ -51,9 +67,14 @@
     justify-content: center;
     align-items: center;
     width: 40vw;
+    min-width: 300px;
+    max-width: 600px;
     height: 50px;
     border-radius: 20px;
     background: rgb(202 253 255 / 50%);
+    border: 1px solid #00bcd4;
+    box-shadow: 0 0 15px rgb(0 188 212 / 30%);
+    overflow: hidden;
 }
 
 .main .input .talk {
@@ -61,6 +82,7 @@
     outline: none;
     border: none;
     width: 50px;
+    min-width: 50px;
     height: 50px;
     display: flex;
     justify-content: center;
@@ -71,11 +93,43 @@
 
 .main .input .talk i {
     font-size: 20px;
-    color: #aed0d0;
+    color: #00bcd4;
+}
+
+.main .input .talk:hover i {
+    color: #fff;
 }
 
 .main .input .content {
     color: #aed0d0;
-    font-size: 15px;
+    font-size: 13px;
     margin-right: 20px;
+    text-align: center;
 }
+
+@media screen and (max-width: 600px) {
+
+    .main .image-container img {
+        width: 250px;
+    }
+
+    .main .image-container h1 {
+        font-size: 30px;
+        letter-spacing: 5px;
+    }
+
+    .main .image-container p {
+        font-size: 12px;
+        margin-bottom: 30px;
+    }
+
+    .main .input {
+        width: 90%;
+        min-width: unset;
+    }
+
+    .main .input .content {
+        font-size: 11px;
+    }
+}
+
