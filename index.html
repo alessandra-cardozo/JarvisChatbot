@@ -4,40 +4,54 @@
 
 <head>
     <meta charset="UTF-8">
-
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>JARVIS - Assistente Virtual</title>
 
+    <link rel="shortcut icon" href="avatar.png" type="image/x-icon">
+
     <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 
 <body>
 
-    <div class="main">
+    <section class="main">
 
-        <h1>J.A.R.V.I.S</h1>
+        <div class="image-container">
 
-        <p>
-            Olá! Sou o JARVIS, seu assistente virtual.
-        </p>
+            <div class="image">
+                <img src="giphy.gif" alt="JARVIS - Assistente Virtual">
+            </div>
 
-        <p>
-            Clique no microfone e fale comigo em português.
-        </p>
+            <h1>J A R V I S</h1>
 
-        <button class="talk">
-            🎤 Falar com JARVIS
-        </button>
+            <p>
+                Olá! Eu sou o JARVIS, seu assistente virtual.
+                Como posso ajudar você?
+            </p>
 
-        <h3 class="content">
-            Clique no botão para começar.
-        </h3>
+        </div>
 
-    </div>
+        <div class="input">
+
+            <button class="talk" type="button" aria-label="Falar com JARVIS">
+                <i class="fas fa-microphone-alt"></i>
+            </button>
+
+            <h1 class="content">
+                Clique aqui para falar
+            </h1>
+
+        </div>
+
+    </section>
 
     <script src="app.js"></script>
 
 </body>
-
 </html>
+
