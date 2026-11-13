@@ -4,6 +4,7 @@ const content = document.querySelector('.content');
 
 // Configuração da voz do JARVIS
 function speak(text) {
+
     if (!('speechSynthesis' in window)) {
         alert("Seu navegador não suporta síntese de voz.");
         return;
@@ -30,14 +31,15 @@ function speak(text) {
     window.speechSynthesis.speak(text_speak);
 }
 
-// Verifica se o navegador reconhece voz
+// Reconhecimento de voz
 const SpeechRecognition =
     window.SpeechRecognition ||
     window.webkitSpeechRecognition;
 
 if (!SpeechRecognition) {
 
-    alert("Seu navegador não suporta reconhecimento de voz. Utilize o Google Chrome.");
+    content.textContent =
+        "Seu navegador não suporta reconhecimento de voz. Utilize o Google Chrome.";
 
 } else {
 
@@ -69,12 +71,9 @@ if (!SpeechRecognition) {
         if (event.error === "not-allowed") {
             content.textContent = "Permita o acesso ao microfone.";
         } else {
-            content.textContent = "Não consegui entender. Tente novamente.";
+            content.textContent =
+                "Não consegui entender. Tente novamente.";
         }
-    };
-
-    recognition.onend = () => {
-        console.log("Reconhecimento de voz finalizado.");
     };
 
     // Botão do microfone
@@ -166,8 +165,10 @@ if (!SpeechRecognition) {
 
             speak("Pesquisando na Wikipédia.");
 
-        } else if (message.includes("obrigado") ||
-                   message.includes("obrigada")) {
+        } else if (
+            message.includes("obrigado") ||
+            message.includes("obrigada")
+        ) {
 
             speak("Por nada! Estou sempre à disposição.");
 
@@ -185,3 +186,4 @@ if (!SpeechRecognition) {
         }
     }
 }
+
